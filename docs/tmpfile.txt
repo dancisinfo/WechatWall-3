@@ -30,8 +30,8 @@ key : fackid    nickname    msgid    msg    time   audit
 
 
 ***************消息管理页面中用户信息提取********************
-msgid    fackid    nickname    msg    time
-
+msgid        fackid        nickname      msg         time
+arr[1][]       arr[2][]        arr[3][]          arr[4][]      arr[5][]
 ***************提取信息的正则表达式*********************
 1.提取包含所有消息的字符串
 /\{"msg_item(.*)msg_item/

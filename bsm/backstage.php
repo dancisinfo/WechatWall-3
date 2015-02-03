@@ -7,6 +7,6 @@
  * 创建源文件
  */
 require_once('./inc/main.inc.php');
-
+echo "<charset = 'utf-8'>";
 $wechat = new wechat($username, $password);
 ?>

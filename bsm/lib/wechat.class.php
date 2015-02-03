@@ -24,7 +24,7 @@ class wechat {
 		$this->username = $username;
 		$this->password = $password;
 		$this->login();
-		$result = $this->getMsg();
+		$this->getUserMsg();
 	}
 
 	/**
@@ -61,7 +61,24 @@ class wechat {
 	public function getUserMsg() {
 		$url = 'https://mp.weixin.qq.com/cgi-bin/message?t=message/list&count='.$this->count.'&day=7&token='.$this->token.'&lang=zh_CN';
 		$httpReqst = new httpRequest;
-		$result = $httpReqst->getHttp($url, $this->cookie);
+		$msgPage = $httpReqst->getHttp($url, $this->cookie); // 获取消息管理页面
+
+		// 用户消息预处理
+		$pattern = "/\{\"msg_item.*msg_item/";
+		if (preg_match($pattern, $msgPage, $matchs)) {
+			$preData = $matchs[0];
+		}
+
+		// 提取msgid,fackid,nickname,msg,time
+		$pattern = '/"id":(\d*?),"type":\d,"fakeid":"(\d*?)","nick_name":"(.*?)","date_time":(\d*),"((content)|(source))":"(.*?)"/';
+		if (preg_match_all($pattern, $preData, $matchs)) {
+			echo '<meta charset = "utf-8">';
+			echo "<pre>";
+			print_r($matchs);
+			echo "</pre>";
+		}
+
+
 
 	}
 
