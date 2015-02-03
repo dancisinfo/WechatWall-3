@@ -6,7 +6,7 @@
  * 1. 2015-02-02    20:33    Dreamshield
  * 创建源文件
  */
-require('./inc/main.inc.php'); // 包含文件
+require_once('./inc/main.inc.php'); // 包含文件
 
 class wechat {
 	private $username;
@@ -14,6 +14,7 @@ class wechat {
 	private $cookie;
 	private $token;
 	private $count = 1000; // 微信公众账号的消息管理页面中单页显示消息数量
+	private $userMsg; // 用户消息
 
 	/**
 	 * [__construct: 获取公众账号用户名和密码]
@@ -24,7 +25,10 @@ class wechat {
 		$this->username = $username;
 		$this->password = $password;
 		$this->login();
-		$this->getUserMsg();
+		$userMsg = $this->getUserMsg();
+		echo "<pre>";
+		print_r($userMsg);
+		echo"</pre>";
 	}
 
 	/**
@@ -56,7 +60,7 @@ class wechat {
 
 	/**
 	 * [getUserMsg: 获取微信公众账号的消息管理页面]
-	 * @return [resource] $result [消息管理页面]
+	 * @return [array] $userMsg [用户消息信息]
 	 */
 	public function getUserMsg() {
 		$url = 'https://mp.weixin.qq.com/cgi-bin/message?t=message/list&count='.$this->count.'&day=7&token='.$this->token.'&lang=zh_CN';
@@ -67,18 +71,21 @@ class wechat {
 		$pattern = "/\{\"msg_item.*msg_item/";
 		if (preg_match($pattern, $msgPage, $matchs)) {
 			$preData = $matchs[0];
+		} else {
+			echo "用户消息预处理失败\n";
 		}
 
 		// 提取msgid,fackid,nickname,msg,time
 		$pattern = '/"id":(\d*?),"type":\d,"fakeid":"(\d*?)","nick_name":"(.*?)","date_time":(\d*),"((content)|(source))":"(.*?)"/';
 		if (preg_match_all($pattern, $preData, $matchs)) {
-			echo '<meta charset = "utf-8">';
-			echo "<pre>";
-			print_r($matchs);
-			echo "</pre>";
+			$userMsg = array('msgid'=>$matchs[1], 'fackid'=>$matchs[2], 'nickname'=>$matchs[3], 'datatime'=>$matchs[4], 'content'=>$matchs[8]);
+		} else {
+			echo "提取msgid,fakeid,nickname,msg,time失败\n";
 		}
+		return $userMsg;
+	}
 
-
+	public function storeUserMsg($userMsg, ) {
 
 	}
 
