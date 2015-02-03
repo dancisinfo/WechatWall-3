@@ -25,9 +25,6 @@ class wechat {
 		$this->password = $password;
 		$this->login();
 		$result = $this->getMsg();
-		echo "<pre>";
-		print_r($result);
-		echo "</pre>";
 	}
 
 	/**
@@ -65,7 +62,7 @@ class wechat {
 		$url = 'https://mp.weixin.qq.com/cgi-bin/message?t=message/list&count='.$this->count.'&day=7&token='.$this->token.'&lang=zh_CN';
 		$httpReqst = new httpRequest;
 		$result = $httpReqst->getHttp($url, $this->cookie);
-		return $result;
+
 	}
 
 }
