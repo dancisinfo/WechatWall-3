@@ -1,12 +1,12 @@
 <?php
 /**
- * FileName: mysql.class.php
+ * FileName: mysqlDB.class.php
  * Discription: Mysql数据库操作类
  * ModifyHistory:
  * 1. 2015-02-03    20:43    Dreamshield
  * 创建源文件
  */
-class mysql{
+class mysqlDB{
 	private $db;
 
 	/**
@@ -44,7 +44,7 @@ class mysql{
 		if ($result) {
 			return $this->db->affected_rows; // 返回插入的行数
 		} else {
-			die("查询所有数据失败");
+			die("插入数据失败");
 		}
 	}
 
@@ -62,12 +62,16 @@ class mysql{
 			for ($i = 0; $i < $numRows; $i++) { // 将查询结果存入数组
 				$tmpResult[] = $result->fetch_assoc();
 			}
-			foreach ($tmpResult as $key => $value) { // 去掉数据存入数据库时添加的反斜杠
-				$searchResult[$key] = stripslashes($value);
+			$result->free();
+			if (get_magic_quotes_gpc()) {
+				foreach ($tmpResult as $key => $value) { // 去掉数据存入数据库时添加的反斜杠
+					$searchResult[$key] = stripslashes($value);
+				}
+				return $searchResult;
+			} else {
+				return $tmpResult;
 			}
 		}
-		$result->free();
-		return $searchResult;
 	}
 
 	/**

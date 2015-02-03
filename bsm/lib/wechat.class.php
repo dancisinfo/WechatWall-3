@@ -6,7 +6,7 @@
  * 1. 2015-02-02    20:33    Dreamshield
  * 创建源文件
  */
-require_once('./inc/main.inc.php'); // 包含文件
+require_once('/var/www/project/WechatWall/bsm/inc/main.inc.php'); // 包含文件
 
 class wechat {
 	private $username;
@@ -20,20 +20,18 @@ class wechat {
 	 * [__construct: 获取公众账号用户名和密码]
 	 * @param [string] $username 微信公众账号用户名
 	 * @param [string] $password  微信公众账号密码
+	 * @param [无返回值]
 	 */
 	public function __construct($username, $password) {
 		$this->username = $username;
 		$this->password = $password;
 		$this->login();
-		$userMsg = $this->getUserMsg();
-		echo "<pre>";
-		print_r($userMsg);
-		echo"</pre>";
+		$this->getUserMsg();
 	}
 
 	/**
 	 * [login: 实现模拟登陆]
-	 * @return [NULL]
+	 * @return [无返回值]
 	 */
 	public function login() {
 		// 构造POST报文体
@@ -85,7 +83,7 @@ class wechat {
 		return $userMsg;
 	}
 
-	public function storeUserMsg($userMsg, ) {
+	public function storeUserMsg($userMsg, $localhost, $username_db, $password_db, $database) {
 
 	}
 

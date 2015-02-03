@@ -10,7 +10,7 @@
 require_once('/var/www/project/DBData/WechatWall/wechatAccount.inc.php'); // 此项目相关的账户信息
 require_once('/var/www/project/WechatWall/bsm/lib/wechat.class.php'); // 模拟登陆与用户信息爬取
 require_once('/var/www/project/WechatWall/bsm/lib/httpRequest.class.php'); // http报文发送
-require_once('/var/www/project/WechatWall/bsm/lib/mysql.class.php'); // 数据库操作类
+require_once('/var/www/project/WechatWall/bsm/lib/mysqlDB.class.php'); // 数据库操作类
 
 
 ?>
