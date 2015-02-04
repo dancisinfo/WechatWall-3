@@ -10,14 +10,16 @@ require_once('/var/www/project/WechatWall/bsm/inc/main.inc.php'); // 包含文�
 
 echo "<meta charset='utf-8'>";
 $db = new mysqlDB($localhost, $username_db, $password_db, $database);
-// 数据库查询测试
+
+// 数据查询测试
 $query = "select * from books";
 $result = $db->findAll($query);
 echo "<pre>";
 print_r($result);
 echo "</pre>";
-// 数据库插入测试
-$bookinfo = array(
+
+// 数据插入测试
+/*$bookinfo = array(
 	"isbn"=>"0-104-11111-0",
 	"author"=>"zhpf",
 	"title"=>"hahahaahha",
@@ -28,11 +30,30 @@ $query = "select * from books";
 $result = $db->findAll($query);
 echo "<pre>";
 print_r($result);
+echo "</pre>";*/
+
+// 数据更新测试
+// $bookUpdate = array(
+// 	"author"=>"Dreamshield",
+// 	"title"=>"BALABALA",
+// 	"price"=>50
+// );
+// $where = "isbn='0-104-11111-0'";
+// $db->update('books', $bookUpdate, $where);
+// $query = "select * from books";
+// $result = $db->findAll($query);
+// echo "<pre>";
+// print_r($result);
+// echo "</pre>";
+
+// 数据删除测试
+$where = "isbn='0-104-11111-0'";
+$db->delete('books', $where);
+$query = "select * from books";
+$result = $db->findAll($query);
+echo "<pre>";
+print_r($result);
 echo "</pre>";
-
-
-
-
 
 
 ?>
