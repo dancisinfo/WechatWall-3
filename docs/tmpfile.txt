@@ -38,6 +38,10 @@ arr[1][]       arr[2][]        arr[3][]          arr[4][]      arr[5][]
 2.在第1步的基础上提取msgid,fakeid,nickname,msg,time信息
 "id":(\d*),.*"fakeid":"(\d*)","nick_name":"(.*)","date_time":(\d*),"content":"(.*)","source"
 
+用户头像与图片消息url
+https://mp.weixin.qq.com/cgi-bin/getimgdata?token=661260512&msgid=204254737&mode=small&source=&fileId=0&ow=-1014756625
+https://mp.weixin.qq.com/misc/getheadimg?token=661260512&fakeid=1014756624&msgid=204254388
+
 
 
 

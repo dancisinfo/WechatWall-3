@@ -82,6 +82,15 @@ class wechat {
 		return $userMsg;
 	}
 
+	/**
+	 * [storeUserMsg: 消息管理页面爬取的用户消息等信息插入数据库]
+	 * @param  [array]  $userMsg    爬取的用户消息等信息]
+	 * @param  [string] $localhost   数据库主机名]
+	 * @param  [string] $username 数据库用户名]
+	 * @param  [string] $password  数据库密码]
+	 * @param  [string] $database   使用的数据库]
+	 * @return [type] [无返回值]
+	 */
 	public function storeUserMsg($userMsg, $localhost, $username, $password, $database) {
 		// 对userMsg数组信息合并为一个二维数组,该数组以数字键值,每个一维数组的键值分别是:
 		//  msgid  fakeid  nickname  time  content  audit
@@ -101,21 +110,41 @@ class wechat {
 			);
 		}
 
-		// debug-start
-		// echo "<pre>";
-		// print_r($userMsgDB);
-		// echo "</pre>";
-		// debug-stop
-
-		// 用户消息插入数据库
+		// 用户消息插入数据库并将用户头像存入本地文件,注意存储头像与消息的先后顺序
 		$db = new mysqlDB($localhost, $username, $password, $database);
 		foreach ($userMsgDB as $value) {
+			// 查询用户fakeid是否存在,fakeid是用户身份的唯一标识,存储用户头像数据
+			$query = "SELECT fakeid FROM userMsg WHERE fakeid = '". $value['fakeid']. "'";
+			$findFlagPho = $db->find($query); // 查询当前消息是否已经存在
+			if ('' == $findFlagPho) { // 当用户不存在,是存储头像数据
+				$img = $this->getUserPhoto($this->token, $this->cookie, $value['fakeid'], $value['msgid']);
+				$imgDir = "/var/www/project/WechatWall/bsm/imgs/userPhotos/".$value['fakeid'].".jpeg";
+				$fp = fopen($imgDir, 'a');
+				fwrite($fp, $img);
+				fclose($fp);
+			}
+			// 查询当前消息是否存在,msgid是某条消息的唯一标识,存储用户消息
 			$query = "SELECT msgid FROM userMsg WHERE msgid = '". $value['msgid']. "'";
-			$findFlag = $db->find($query); // 查询当前消息是否已经存在
-			if ('' == $findFlag) { // 当前消息不存在,返回空执行数据插入操作
+			$findFlagMsg = $db->find($query); // 查询当前消息是否已经存在
+			if ('' == $findFlagMsg) { // 当前消息不存在时返回空,执行数据插入操作
 				$db->insert('userMsg', $value);
 			}
 		}
+	}
+
+	/**
+	 * [getUserPhoto: 获取用户头像数据]
+	 * @param  [string] $token  token
+	 * @param  [string] $cookie cookie
+	 * @param  [string] $fakeid  fakeid
+	 * @param  [string] $msgid  msgid
+	 * @return  [resource] 用户头像数据
+	 */
+	public function getUserPhoto($token, $cookie, $fakeid, $msgid) {
+		$url ='https://mp.weixin.qq.com/misc/getheadimg?token='.$token.'&fakeid='.$fakeid.'&msgid='.$msgid;
+		$httpReqst = new httpRequest;
+		$result = $httpReqst->getHttp($url, $cookie);
+		return $result;
 	}
 }
 
