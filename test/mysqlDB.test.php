@@ -9,11 +9,11 @@
 require_once('/var/www/project/WechatWall/bsm/inc/main.inc.php'); // 包含文件
 
 echo "<meta charset='utf-8'>";
-$db = new mysqlDB($localhost, $username_db, $password_db, $database);
+$db = new mysqlDB($localhost, $usernameDB, $pwdDB, $database);
 
 // 数据查询测试
-$query = "select * from books";
-$result = $db->findAll($query);
+$query = "select author from books where isbn = '0-672-31967-3'";
+$result = $db->find($query);
 echo "<pre>";
 print_r($result);
 echo "</pre>";
@@ -47,13 +47,13 @@ echo "</pre>";*/
 // echo "</pre>";
 
 // 数据删除测试
-$where = "isbn='0-104-11111-0'";
+/*$where = "isbn='0-104-11111-0'";
 $db->delete('books', $where);
 $query = "select * from books";
 $result = $db->findAll($query);
 echo "<pre>";
 print_r($result);
-echo "</pre>";
+echo "</pre>";*/
 
 
 ?>

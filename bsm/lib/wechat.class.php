@@ -26,7 +26,6 @@ class wechat {
 		$this->username = $username;
 		$this->password = $password;
 		$this->login();
-		$this->getUserMsg();
 	}
 
 	/**
@@ -76,17 +75,48 @@ class wechat {
 		// 提取msgid,fackid,nickname,msg,time
 		$pattern = '/"id":(\d*?),"type":\d,"fakeid":"(\d*?)","nick_name":"(.*?)","date_time":(\d*),"((content)|(source))":"(.*?)"/';
 		if (preg_match_all($pattern, $preData, $matchs)) {
-			$userMsg = array('msgid'=>$matchs[1], 'fackid'=>$matchs[2], 'nickname'=>$matchs[3], 'datatime'=>$matchs[4], 'content'=>$matchs[8]);
+			$userMsg = array('msgid'=>$matchs[1], 'fackid'=>$matchs[2], 'nickname'=>$matchs[3], 'time'=>$matchs[4], 'content'=>$matchs[8]);
 		} else {
 			echo "提取msgid,fakeid,nickname,msg,time失败\n";
 		}
 		return $userMsg;
 	}
 
-	public function storeUserMsg($userMsg, $localhost, $username_db, $password_db, $database) {
+	public function storeUserMsg($userMsg, $localhost, $username, $password, $database) {
+		// 对userMsg数组信息合并为一个二维数组,该数组以数字键值,每个一维数组的键值分别是:
+		//  msgid  fakeid  nickname  time  content  audit
+		foreach ($userMsg as $value) { // 为了使用list()函数将userMsg数组改为以数字为索引
+			$tmp[]=$value;
+		}
+		list($msgid, $fakeid, $nickname, $time, $content)  = $tmp; // 将tmp拆成5个一维数组
+		$len = count($msgid); // 计算每个一维数组长度,即消息数量
+		for ($i=0; $i < $len; $i++) { // 将消息数组合成便于数据库插入的格式
+			$userMsgDB[] = array(
+				'msgid'=>$msgid[$i],
+				'fakeid'=>$fakeid[$i],
+				'nickname'=>$nickname[$i],
+				'content'=>$content[$i],
+				'time'=>$time[$i],
+				'audit'=>0
+			);
+		}
 
+		// debug-start
+		// echo "<pre>";
+		// print_r($userMsgDB);
+		// echo "</pre>";
+		// debug-stop
+
+		// 用户消息插入数据库
+		$db = new mysqlDB($localhost, $username, $password, $database);
+		foreach ($userMsgDB as $value) {
+			$query = "SELECT msgid FROM userMsg WHERE msgid = '". $value['msgid']. "'";
+			$findFlag = $db->find($query); // 查询当前消息是否已经存在
+			if ('' == $findFlag) { // 当前消息不存在,返回空执行数据插入操作
+				$db->insert('userMsg', $value);
+			}
+		}
 	}
-
 }
 
 ?>
