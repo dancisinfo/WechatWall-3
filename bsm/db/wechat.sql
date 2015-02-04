@@ -13,5 +13,5 @@ CREATE TABLE userMsg
 
 -- 用户授权
 GRANT ALL ON wechat.*
-to 'jerry'@'localhost' IDENTIFIED BY 'fei12345';
+to 'jerry'@'localhost';
 FLUSH PRIVILEGES;
