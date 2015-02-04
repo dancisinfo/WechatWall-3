@@ -28,18 +28,19 @@ class mysqlDB{
 	 * @param  [string] $table 	[数据插入的表名]
 	 * @param  [array]  $arr 	[插入的键值对]
 	 * @return  [int] 	$rows   [影响的行数]
+	 * <需要扩展:一次性插入多条数据>
 	 */
 	public function insert($table, $arr) {
 		foreach ($arr as $key => $value) {
 			if (!get_magic_quotes_gpc()) { // 判断是否开启magic_quotes
 				$value = addslashes($value); // 添加反斜杠,提高安全性
 			}
-			$arrKey[] = "`".$key."`";
+			$arrKey[] = $key;
 			$arrValue[] = "'".$value."'";
 		}
 		$keys = implode(",", $arrKey);
 		$values = implode(",", $arrValue);
-		$query = "insert into ".$table."(".$keys.") values(".$values.")";
+		$query = "INSERT INTO ".$table." (".$keys.") VALUES (".$values.")";
 		$result = $this->db->query($query);
 		if ($result) {
 			return $this->db->affected_rows; // 返回插入的行数
@@ -67,11 +68,11 @@ class mysqlDB{
 				foreach ($tmpResult as $key => $value) { // 去掉数据存入数据库时添加的反斜杠
 					$searchResult[$key] = stripslashes($value);
 				}
-				return $searchResult;
 			} else {
-				return $tmpResult;
+				$searchResult = $tmpResult;
 			}
 		}
+		return $searchResult;
 	}
 
 	/**
