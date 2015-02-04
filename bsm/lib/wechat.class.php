@@ -58,7 +58,7 @@ class wechat {
 
 	/**
 	 * [getUserMsg: 获取微信公众账号的消息管理页面]
-	 * @return [array] $userMsg [用户消息信息]
+	 * @return [array] $userMsg 用户消息信息
 	 */
 	public function getUserMsg() {
 		$url = 'https://mp.weixin.qq.com/cgi-bin/message?t=message/list&count='.$this->count.'&day=7&token='.$this->token.'&lang=zh_CN';

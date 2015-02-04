@@ -21,9 +21,9 @@ class httpRequest{
 
 	/**
 	 * [postHttp: 发送HTTP post请求包]
-	 * @param  [string]		$url      		[post请求的url]
-	 * @param  [array] 		$postData 	[post请求报文]
-	 * @return  [resource] 	$result 		[请求的页面信息]
+	 * @param  [string]	      $url            post请求的url
+	 * @param  [array]       $postData  post请求报文
+	 * @return  [resource]  $result      请求的页面信息
 	 */
 	public function postHttp($url, $postData, $cookie) {
 		$ch = curl_init();
@@ -49,9 +49,9 @@ class httpRequest{
 
 	/**
 	 * [getHttp: 发送HTTP get请求包]
-	 * @param [string] 		$url 		[get请求的url]
-	 * @param [array] 		$cookie 	[获取的cookie]
-	 * @return [resources]  $result    	[请求的页面信息]
+	 * @param [string]        $url        get请求的url
+	 * @param [array]         $cookie  获取的cookie
+	 * @return [resources] $result   请求的页面信息
 	 */
 	public function getHttp($url, $cookie) {
 		$ch = curl_init();

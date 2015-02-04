@@ -11,10 +11,10 @@ class mysqlDB{
 
 	/**
 	 * [__construct: 建立数据库连接]
-	 * @param [string] $localhost	[主机名]
-	 * @param [string] $username [用户名]
-	 * @param [string] $password  [密码]
-	 * @param [string] $database 	[连接的数据库名]
+	 * @param [string] $localhost   主机名
+	 * @param [string] $username 用户名
+	 * @param [string] $password  密码
+	 * @param [string] $database   连接的数据库名
 	 */
 	public function __construct($localhost, $username, $password, $database) {
 		$this->db = new mysqli($localhost, $username, $password, $database);
@@ -25,9 +25,9 @@ class mysqlDB{
 
 	/**
 	 * [insert: 向数据库中插入数据]
-	 * @param  [string] $table 	[数据插入的表名]
-	 * @param  [array]  $arr 	[插入的键值对]
-	 * @return  [int] 	$rows   [影响的行数]
+	 * @param  [string] $table  数据插入的表名
+	 * @param  [array]  $arr      插入的键值对
+	 * @return  [int]      $rows   影响的行数
 	 * INSERT INTO table_name (column1, column2,...) VALUES (value1, value2,....)
 	 * <扩展:一次性插入多条数据>
 	 */
@@ -52,8 +52,8 @@ class mysqlDB{
 
 	/**
 	 * [findAll: 查询指定条件的所有数据]
-	 * @param  [string] $query 		[需要执行的sql语句]
-	 * @return 	 [array]  $searchResult [查询结果]
+	 * @param  [string] $query              需要执行的sql语句
+	 * @return 	 [array]  $searchResult  查询结果
 	 */
 	public function findAll($query) {
 		$result = $this->db->query($query);
@@ -78,9 +78,9 @@ class mysqlDB{
 
 	/**
 	 * [update: 更新数据库]
-	 * @param  [string] $table 	 [需要更新的表名]
-	 * @param  [array]  $arr   	 [键值对]
-	 * @param  [string] $where [更新条件]
+	 * @param  [string] $table   需要更新的表名
+	 * @param  [array]  $arr       键值对
+	 * @param  [string] $where 更新条件
 	 * @return  [无返回值]
 	 * UPDATE table_name SET column1='value1',column2='value2' WHERE  some_column= 'some_value'
 	 * <扩展:一次性更新多条数据>
@@ -102,8 +102,8 @@ class mysqlDB{
 
 	/**
 	 * [delete: 删除数据库表中的单行数据]
-	 * @param  [string] $table 	 [表名]
-	 * @param  [string] $where [删除条件]
+	 * @param  [string] $table   表名
+	 * @param  [string] $where 删除条件
 	 * @return  [无返回值]
 	 * DELETE FROM table_name WHERE some_colunm='some_value'
 	 * <扩展:一次性删除多条数据>
