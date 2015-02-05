@@ -7,8 +7,7 @@
  * 创建源文件
  */
 require_once('./inc/main.inc.php');
-
-echo "<meta charset='utf-8'>";
+header("charset=utf8");
 $wechat = new wechat($usernameWechat, $pwdWechat);
 $userMsg = $wechat->getUserMsg(); // 获取消息管理页面的用户消息
 $wechat->storeUserMsg($userMsg, $localhost, $usernameDB, $pwdDB, $database); // 存储用户消息与用户头像

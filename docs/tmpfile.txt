@@ -18,7 +18,7 @@ table name: userMsg 存储用户信息与非图片消息
 key: msgid(pri)    fackid    nickname    msg    time   audit
 注: 用户头像和图片消息存储在本地目录
 用户头像: /WechatWall/bsm/imgs/photos
-图片消息: /WechatWall/bsm/imgs/msg
+图片消息: /WechatWall/bsm/imgs/msgs
 
 
 ****************数据处理流程相关****************
@@ -40,8 +40,12 @@ arr[1][]       arr[2][]        arr[3][]          arr[4][]      arr[5][]
 2.在第1步的基础上提取msgid,fakeid,nickname,msg,time信息
 "id":(\d*),.*"fakeid":"(\d*)","nick_name":"(.*)","date_time":(\d*),"content":"(.*)","source"
 
-用户头像与图片消息url
+用户头像、图片消息与动态表情url
+动态表情
+https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/13.gif
+图片消息
 https://mp.weixin.qq.com/cgi-bin/getimgdata?token=661260512&msgid=204254737&mode=small&source=&fileId=0&ow=-1014756625
+用户头像
 https://mp.weixin.qq.com/misc/getheadimg?token=661260512&fakeid=1014756624&msgid=204254388
 
 
