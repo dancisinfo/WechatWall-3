@@ -118,7 +118,7 @@ class wechat {
 			$findFlagPho = $db->find($query); // 查询当前消息是否已经存在
 			if ('' == $findFlagPho) { // 当用户不存在,是存储头像数据
 				$img = $this->getUserPhoto($this->token, $this->cookie, $value['fakeid'], $value['msgid']);
-				$imgDir = "/var/www/project/WechatWall/bsm/imgs/userPhotos/".$value['fakeid'].".jpeg";
+				$imgDir = "/var/www/project/WechatWall/bsm/imgs/photos/".$value['fakeid'].".jpeg";
 				$fp = fopen($imgDir, 'a');
 				fwrite($fp, $img);
 				fclose($fp);

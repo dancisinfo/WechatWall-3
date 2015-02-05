@@ -12,11 +12,13 @@
 
 
 用户信息表设计
-table name : userinfo
-key : fackid    nickname    msgid    msg    time   audit
-注: 用户头像存入本地目录，不存入数据库
-要以msgid为主键，应为每一个消息的msgid均不同
-
+database: wechat
+----------------------------------------------------------------------------
+table name: userMsg 存储用户信息与非图片消息
+key: msgid(pri)    fackid    nickname    msg    time   audit
+注: 用户头像和图片消息存储在本地目录
+用户头像: /WechatWall/bsm/imgs/photos
+图片消息: /WechatWall/bsm/imgs/msg
 
 
 ****************数据处理流程相关****************

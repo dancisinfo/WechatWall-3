@@ -21,6 +21,7 @@ class mysqlDB{
 		if ($this->db->connect_errno) {
 			die('数据库链接错误:' . $this->db->connect_errno);
 		}
+		$this->db->query('set names utf8');
 	}
 
 	/**

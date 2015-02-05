@@ -10,7 +10,7 @@ CREATE TABLE userMsg
 	content VARCHAR(255),
 	time INT UNSIGNED,
 	audit TINYINT
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET utf8  COLLATE utf8_general_ci;
 
 -- 用户授权
 GRANT ALL ON wechat.*
