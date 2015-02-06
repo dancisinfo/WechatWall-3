@@ -1,0 +1,105 @@
+body {
+	background: url(../images/login_bg.jpg) no-repeat fixed;
+	background-position: center center;
+	background-size: 100% 100%;
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+}
+
+/* start-login-form */
+div.login{
+	background: url(../images/form_bg.png) no-repeat;
+	background-size: 100% 100%;
+	width: 30%;
+	margin: 10% auto 10% auto;
+ 	padding-bottom:2em;
+ 	opacity: 0.7;
+}
+
+div.login h1{
+	color: white;
+	font-size: 2em;
+	font-weight: 600;
+	text-align: center;
+	margin: 10% auto 5% auto;
+	padding-top: 2em;
+}
+
+div.login form input[type="text"] {
+	width: 65%;
+	font-size: 1em;
+	font-weight: 700;
+	color: #ccc;
+	padding: 1em 1em;
+	margin: 0.8em auto 0.8em 12%;
+	border: 1px solid #28344B;
+	background:#28344B;
+	border-radius:6px;
+	box-shadow: inset 2px 2px 10px rgba(26, 21, 21, 0.54);
+	font-family: 'Open Sans', sans-serif;
+
+}
+
+div.login form input[type="password"] {
+	width: 65%;
+	font-size: 1em;
+	font-weight: 700;
+	color: #ccc;
+	padding: 1em 1em;
+	margin: 0.8em auto 0.8em 12%;
+	border: 1px solid #28344B;
+	background:#28344B;
+	border-radius:6px;
+	box-shadow: inset 2px 2px 10px rgba(26, 21, 21, 0.54);
+	font-family: 'Open Sans', sans-serif;
+}
+
+div.login form input[type="text"]:hover {
+	box-shadow: 0px 0px 8px 1px #70A2E7;
+}
+
+div.login form input[type="password"]:hover {
+	box-shadow: 0px 0px 8px 1px #70A2E7;
+}
+
+.submit {
+	margin: 0.8em auto;
+	border-radius:1px solid #94BFF5;
+}
+
+div.login form input[type="submit"] {
+	width: 60%;
+	font-size: 19px;
+	display: inline-block;
+	font-weight:700;
+	color: #28467B;
+	border-radius: 6px;
+	cursor: pointer;
+	border: 0px;
+	margin: 0.8em auto 0 20%;
+	padding: 0.8em 1em;
+	background: #9DBEF9;
+	box-shadow: 0px 0px 8px 1px #000;
+}
+/* end-login-form */
+
+/* start-copyright */
+.copyright {
+	text-align: center;
+	margin-top:0.250em;
+}
+
+.copyright p{
+	color: #CCC;
+	font-size: 1em;
+}
+
+.copyright p a {
+	color: #3460A8;
+}
+.copyright p a:hover{
+	color: white;
+}
+/* end-copyright */
