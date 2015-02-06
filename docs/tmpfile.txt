@@ -58,9 +58,35 @@ https://mp.weixin.qq.com/misc/getheadimg?token=661260512&fakeid=1014756624&msgid
 (1)通过则显示在审核通过子页面,并将数据库中userMsg表中的audit字段updata为1
 (2)未通过则直接删除消息
 
-nickname    fackid    time    msg     上墙    审核
+(一)当登陆消息管理系统时第一个内容页面是新消息页面,此时首先要执行一次这样的流程:
+1.微信公众账号消息爬
+2.将爬去到的数据写入数据库
+3.然后将爬取的新消息在新消息内容页面显示出来
+(二)每一次点击新消息按钮都会执行如下流程
+1.微信公众账号消息爬
+2.将爬去到的数据写入数据库
+3.然后将爬取的新消息在新消息内容页面显示出来
+(三)每一次点击审核通过按钮都会执行一下流程
+1.从数据库中读取已经通过审核的消息
+2.将读取到的消息在审核通过内容页面显示出来
+
+nickname    fackid    time    msg     upwall    delete
 
 
+
+**************************index.php*********************************
+require_once('./inc/main.inc.php');
+// header("charset=utf-8");
+echo "<meta charset='utf-8'>";
+$wechat = new wechat($userWechat, $pwdWechat);
+// $userMsg = $wechat->getUserMsg(); // 获取消息管理页面的用户消息
+// $wechat->storeUserMsg($userMsg, $localhost, $usernameDB, $pwdDB, $database); // 存储用户消息与用户头像
+$wechat->msgGetAndStore($localhost, $userDB, $pwdDB, $database);
+
+// $username = $_POST['username'];
+// $password = $_POST['password'];
+// echo $username."<br>";
+// echo $password."<br>";
 
 
 

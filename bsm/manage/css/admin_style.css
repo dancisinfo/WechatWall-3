@@ -1,3 +1,4 @@
+/******************start-admin.html****************/
 body {
 	background: url(../images/login_bg.jpg) no-repeat fixed;
 	background-position: center center;
@@ -83,6 +84,12 @@ div.login form input[type="submit"] {
 	background: #9DBEF9;
 	box-shadow: 0px 0px 8px 1px #000;
 }
+
+div.login form p {
+	color: red;
+	margin: 0 auto 0 22%;
+	padding: 0px;
+}
 /* end-login-form */
 
 /* start-copyright */
@@ -103,3 +110,4 @@ div.login form input[type="submit"] {
 	color: white;
 }
 /* end-copyright */
+/******************end-admin.html****************/

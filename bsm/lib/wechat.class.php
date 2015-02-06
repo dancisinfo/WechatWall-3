@@ -14,7 +14,7 @@ class wechat {
 	private $cookie;
 	private $token;
 	private $count = 1000; // 微信公众账号的消息管理页面中单页显示消息数量
-	private $userMsg; // 用户消息
+	// private $userMsg; // 获取的消息管理页面的用户消息
 
 	/**
 	 * [__construct: 获取公众账号用户名和密码]
@@ -84,11 +84,11 @@ class wechat {
 
 	/**
 	 * [storeUserMsg: 消息管理页面爬取的用户消息等信息插入数据库]
-	 * @param  [array]  $userMsg    爬取的用户消息等信息]
-	 * @param  [string] $localhost   数据库主机名]
-	 * @param  [string] $username 数据库用户名]
-	 * @param  [string] $password  数据库密码]
-	 * @param  [string] $database   使用的数据库]
+	 * @param  [array]  $userMsg    爬取的用户消息等信息
+	 * @param  [string] $localhost   数据库主机名
+	 * @param  [string] $username 数据库用户名
+	 * @param  [string] $password  数据库密码
+	 * @param  [string] $database   使用的数据库
 	 * @return [type] [无返回值]
 	 */
 	public function storeUserMsg($userMsg, $localhost, $username, $password, $database) {
@@ -130,6 +130,7 @@ class wechat {
 				$db->insert('userMsg', $value);
 			}
 		}
+		$db->close(); // 关闭数据库链接
 	}
 
 	/**
@@ -146,6 +147,18 @@ class wechat {
 		$result = $httpReqst->getHttp($url, $cookie);
 		return $result;
 	}
-}
 
+	/**
+	 * [msgGetAndStore获取并存储用户消息页面的消息]
+	 * @param  [string] $localhost   数据库主机名
+	 * @param  [string] $username 数据库用户名
+	 * @param  [string] $password  数据库密码
+	 * @param  [string] $database   使用的数据库
+	 * @return [type] [无返回值]
+	 */
+	public function msgGetAndStore($localhost, $username, $password, $database) {
+		$userMsg = $this->getUserMsg();
+		$this->storeUserMsg($userMsg, $localhost, $username, $password, $database);
+	}
+}
 ?>

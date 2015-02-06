@@ -121,5 +121,13 @@ class mysqlDB{
 			die("数据删除失败");
 		}
 	}
+
+	/**
+	 * [close: 关闭数据库链接]
+	 * @return [无返回值]
+	 */
+	public function close() {
+		$this->db->close();
+	}
 }
 ?>
