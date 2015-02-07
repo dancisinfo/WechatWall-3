@@ -12,12 +12,12 @@ if (isset($_SESSION['userid'])) {
 	$db = new mysqlDB($localhost, $userDB, $pwdDB, $database);
 	$msgid = $_GET['msgid'];
 	$op = $_POST['op'];
-	if ('Y' == $op) {
+	if ('Y' == $op) { // 审核通过,将userMsg中audit键值update为1
 		$audit = array('audit'=>1);
 		$where = "msgid = '$msgid'";
 		$db->update('userMsg', $audit, $where);
 	}
-	if ('N' == $op) {
+	if ('N' == $op) { // 审核未通过,将消息从数据库中删除
 		$where = "msgid = '$msgid'";
 		$db->delete('userMsg', $where);
 	}

@@ -18,14 +18,15 @@ if (isset($_SESSION['userid'])) {
 	<link rel="stylesheet" type="text/css" href="css/top_style.css">
 </head>
 <body>
+	<!-- 显示网页标题 -->
 	<div>
 		<h1>微信墙消息管理系统</h1>
 	</div>
-
+	<!-- 显示登陆用户 -->
 	<div class="userdisp">
 		<table>
 			<tr><td><?php echo "欢迎 ".$userid ?></td></tr>
-			<tr><td><a href="logout.php">退出</a></td></tr>
+			<tr><td><a href="logout.php" target= "_parent">退出</a></td></tr>
 		</table>
 	</div>
 </body>

@@ -8,6 +8,7 @@
  */
 require_once('/var/www/project/WechatWall/bsm/inc/main.inc.php'); // 包含文件
 session_start();
+// 验证用户
 if (isset($_POST['username']) && isset($_POST['password'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
@@ -15,7 +16,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$query = "SELECT * FROM admin WHERE username = '$username' AND password = sha1('$password')";
 	$result = $db->find($query);
 	$db->close();
-	if (NULL != $result) {
+	if (NULL != $result) { // 验证成功跳转至消息管理页面
 		$_SESSION['userid'] = $username;
 		header('Location:index.php');
 	}

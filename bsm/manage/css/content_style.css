@@ -30,3 +30,8 @@ table td {
 	padding: 0;
 	float: right;
 }
+
+caption {
+	/*border: 1px solid #00f;*/
+	font-size: 2em;
+}

@@ -19,15 +19,16 @@ if (isset($_SESSION['userid'])) {
 <body>
 <?php
 	$userid = $_SESSION['userid'];
-	if (isset($_GET['menu']) && ('audited' == $_GET['menu'])) {
+	if (isset($_GET['menu']) && ('audited' == $_GET['menu'])) { // 从数据库中读取以审核通过的消息
 		$db = new mysqlDB($localhost, $userDB, $pwdDB, $database);
 		$query = "SELECT msgid, nickname, fakeid, time, content FROM userMsg WHERE audit = '1'";
 		$auditedMsg = $db->find($query);
 		$db->close();
-		if (NULL != $auditedMsg) {
+		if (NULL != $auditedMsg) { // 列表显示审核通过的消息
 			$table = "<table><tr>";
+			$table .= "<caption>审核通过的消息</caption>";
 			$table .= "<th>消息ID</th><th>昵称</th><th>FakeID</th><th>时间</th><th>内容</th></tr>";
-			foreach ($auditedMsg as $msg) {
+			foreach ($auditedMsg as $msg) { // 遍历所有审核通过的消息
 				$table .= "<tr>";
 				foreach ($msg as $value) {
 					$table .="<td>$value</td>";
@@ -41,7 +42,7 @@ if (isset($_SESSION['userid'])) {
 			echo "没有消息!";
 		}
 	} else {
-		// 将爬取的最新用户消息写入数据库
+		// 爬取的最新用户消息并写入数据库
 		$wechat = new wechat($userWechat, $pwdWechat);
 		$wechat->msgGetAndStore($localhost, $userDB, $pwdDB, $database);
 		// 从wechat数据库中读取还没有处理的消息,准备上墙
@@ -49,15 +50,16 @@ if (isset($_SESSION['userid'])) {
 		$query = "SELECT msgid, nickname, fakeid, time, content FROM userMsg WHERE audit = '0'";
 		$newMsg = $db->find($query);
 		$db->close();
-		if (NULL != $newMsg) {
+		if (NULL != $newMsg) { // 显示没有审核的消息
 			$table = "<table><tr>";
+			$table .= "<caption>最新消息</caption>";
 			$table .= "<th>消息ID</th><th>昵称</th><th>FakeID</th><th>时间</th><th>内容</th><th>上墙</th></tr>";
-			foreach ($newMsg as $msg) {
+			foreach ($newMsg as $msg) { // 遍历数据库中所有没有审核的新消息
 				$table .= "<tr>";
 				foreach ($msg as $value) {
 					$table .="<td>$value</td>";
 				}
-				// 这里对应表格里 上墙,操作
+				// 这里对应表格里上墙操作,将执行的选择发送给msgAudit.php
 				$table .= "<td><form method='post' action='msgAudit.php?msgid=".$msg['msgid']."'>";
 				$table .= "<div id='select'>";
 				$table .= "<input type='radio' name='op' value='Y' checked>&nbsp;Y<br>";
