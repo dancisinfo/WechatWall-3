@@ -17,7 +17,18 @@ if (isset($_SESSION['userid'])) {
 	<meta charset='utf-8'>
 	<link rel="stylesheet" type="text/css" href="css/top_style.css">
 </head>
-	<h1>微信墙消息管理系统</h1>
+<body>
+	<div>
+		<h1>微信墙消息管理系统</h1>
+	</div>
+
+	<div class="userdisp">
+		<table>
+			<tr><td><?php echo "欢迎 ".$userid ?></td></tr>
+			<tr><td><a href="logout.php">退出</a></td></tr>
+		</table>
+	</div>
+</body>
 </html>
 <?php
 } else {

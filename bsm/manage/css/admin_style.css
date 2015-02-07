@@ -85,6 +85,10 @@ div.login form input[type="submit"] {
 	box-shadow: 0px 0px 8px 1px #000;
 }
 
+div.login form input[type="submit"]:hover {
+	box-shadow:  0px 0px 8px 1px #70A2E7;
+}
+
 div.login form p {
 	color: red;
 	margin: 0 auto 0 22%;

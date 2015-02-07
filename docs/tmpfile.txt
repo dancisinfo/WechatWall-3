@@ -70,7 +70,7 @@ https://mp.weixin.qq.com/misc/getheadimg?token=661260512&fakeid=1014756624&msgid
 1.从数据库中读取已经通过审核的消息
 2.将读取到的消息在审核通过内容页面显示出来
 
-nickname    fackid    time    msg     upwall    delete
+nickname    fackid    time    msg     upwall    delete    operation
 
 
 
@@ -89,4 +89,6 @@ $wechat->msgGetAndStore($localhost, $userDB, $pwdDB, $database);
 // echo $password."<br>";
 
 
-
+*************************logout.php**************************
+问题:
+1.会话销毁后整个页面不能跳转至admin.php页面

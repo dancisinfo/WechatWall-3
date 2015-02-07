@@ -14,14 +14,14 @@ if (isset($_SESSION['userid'])) {
 	<header>
 		<title>微信墙消息管理系统</title>
 		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/index_style.css">
 	</header>
 	<frameset rows="15%, *">
-		<frame name="top" src="top.php" noresize="1"></frame>
+		<frame name="top" src="top.php" noresize="1" border=5></frame>
 		<frameset cols="20%, *">
 			<frame name="menu" src="menu.php" noresize="1"></frame>
 			<frame name="content" src="content.php" noresize="1"></frame>
 		</frameset>
-
 	</frameset>
 </html>
 <?php

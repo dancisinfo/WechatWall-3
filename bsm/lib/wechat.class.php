@@ -116,7 +116,7 @@ class wechat {
 			// 查询用户fakeid是否存在,fakeid是用户身份的唯一标识,存储用户头像数据
 			$query = "SELECT fakeid FROM userMsg WHERE fakeid = '". $value['fakeid']. "'";
 			$findFlagPho = $db->find($query); // 查询当前消息是否已经存在
-			if ('' == $findFlagPho) { // 当用户不存在,是存储头像数据
+			if (NULL == $findFlagPho) { // 当用户不存在,是存储头像数据
 				$img = $this->getUserPhoto($this->token, $this->cookie, $value['fakeid'], $value['msgid']);
 				$imgDir = "/var/www/project/WechatWall/images/photos/".$value['fakeid'].".jpeg";
 				$fp = fopen($imgDir, 'a');
@@ -126,7 +126,7 @@ class wechat {
 			// 查询当前消息是否存在,msgid是某条消息的唯一标识,存储用户消息
 			$query = "SELECT msgid FROM userMsg WHERE msgid = '". $value['msgid']. "'";
 			$findFlagMsg = $db->find($query); // 查询当前消息是否已经存在
-			if ('' == $findFlagMsg) { // 当前消息不存在时返回空,执行数据插入操作
+			if (NULL == $findFlagMsg) { // 当前消息不存在时返回空,执行数据插入操作
 				$db->insert('userMsg', $value);
 			}
 		}
