@@ -1,0 +1,91 @@
+body.top{
+	background: url(../images/bg3.jpg) no-repeat fixed;
+	background-size: 100% 100%;
+	background-color: #ccc;
+	width: 100%;
+}
+
+
+
+#head p {
+	color: yellow;
+	font-size: 2.5em;
+	text-align: center;
+	width: 40%;
+	float: right;
+	margin: 1% 30% auto auto;
+}
+
+iframe {
+	border: 0px;
+	width: 800px;
+	height: 500px;
+	margin: 2% auto auto 15%;
+	text-align: center;
+	padding: 0px;
+}
+
+#follow {
+	color: yellow;
+	width: 15%;
+	float: right;
+	margin: 5% 2% auto auto;
+	font-size: 1em;
+	padding: 0px;
+	text-align: center;
+}
+
+#follow p {
+	font-size: 0.8em;
+	margin: 0px 0px 2% 0px;
+}
+
+#wechat img {
+	width: 80%;
+	height: 80%;
+	opacity: 1;
+}
+
+.copy {
+	margin: 1% 42%;
+	float: right;
+	width: 20%;
+	color: blue;
+}
+
+table {
+	width: 100%;
+	margin-bottom: 8px;
+	background: rgba(100, 20, 150,0.6);
+	padding: 0px;
+	border-radius: 20px;
+}
+
+td img{
+	height: 60px;
+	width: 60px;
+	border-radius: 15px;
+	margin-left: 4px;
+	margin-top: 4px;
+}
+
+.photo {
+	width: 80px;
+	height: 80px;
+	vertical-align: center;
+}
+
+td.nickname {
+	height: 5px;
+	opacity: 0.6;
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+}
+
+td.content {
+	opacity: 0.6;
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+}

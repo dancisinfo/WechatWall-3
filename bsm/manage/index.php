@@ -11,11 +11,11 @@ if (isset($_SESSION['userid'])) {
 ?>
 <!DOCTYPE HTML>
 <html>
-	<header>
+	<head>
 		<title>微信墙消息管理系统</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="css/index_style.css">
-	</header>
+	</head>
 	<frameset rows="15%, *">
 		<frame name="top" src="top.php" noresize="1" border=5></frame>
 		<frameset cols="20%, *">

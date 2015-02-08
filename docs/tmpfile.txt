@@ -92,3 +92,31 @@ $wechat->msgGetAndStore($localhost, $userDB, $pwdDB, $database);
 *************************logout.php**************************
 问题:
 1.会话销毁后整个页面不能跳转至admin.php页面
+
+
+
+<?php
+do {
+$db = new mysqlDB($localhost, $userDB, $pwdDB, $database);
+$query = "SELECT nickname, content, fakeid FROM userMsg WHERE audit = '1'";
+$auditedMsg = $db->find($query);
+$msgNum = count($auditedMsg);  // 共$msgNum条消息,每次显示5条停顿5s,然后显示下5条
+
+for ($i = 0; $i <$msgNUm, $i++) {
+
+
+	for ($j = 0; $j < 5; $j++) {
+		$msg = "<table>";
+		$msg .= "<tr><td class = 'photo' rowspan= '2'><img src = '../images/photos/1014756624.jpeg'></td><td class = 'nickname'>nickname</td></tr>";
+		$msg .= "<tr><td class = 'content'>哈哈哈哈哈哈哈</td></tr>";
+		$msg .= "</table>";
+		echo $msg;
+	}
+	sleep(5); // 等待5s后继续显示下5条数据
+}
+
+} while(TRUE);
+
+?>
+
+
